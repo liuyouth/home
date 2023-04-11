@@ -1,7 +1,13 @@
 <template>
   <div id="app">
     <div class="controller">
-
+      <code
+            v-for="key in keys"
+            :key="key"
+            class="font-mono"
+          >
+            {{key.replace("key", "") }}
+          </code>
 
     </div>
     <myWidget :class="{ hidden: help }"> </myWidget>
@@ -31,7 +37,9 @@ var help = ref(false);
 const msg = ref("");
 
 const { alt_a_d, alt_h,current } = useMagicKeys()
-const keys = current
+const keys = computed(() => Array.from(current).forEach(element => {    
+  element.replace("key","")
+}))
 whenever(
   () => current.size!=0,
   () => console.log('A is pressed but not B'),
@@ -56,7 +64,13 @@ const addWidget = (v: never) => {
       widgets.value = [...widgets.value,v]
       showMsg("")
     }
-
+    function removeKeyFromMK(MK: string): string {  
+  if (MK.includes("key")) {  
+    return MK.replace("key", "");  
+  } else {  
+    return MK;  
+  }  
+}
 </script>
 
 <style scoped>
