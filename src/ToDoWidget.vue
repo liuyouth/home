@@ -1,34 +1,25 @@
 <template>
     <div ref="el" :style="style" style="width: 320px;" class="widget">
-        👋 {{word}}，
+        ⏱️ {{word}}
         <br>
-        这里是梦蓝，你的梦想蓝图
+        双击进入编辑模式 修改字体大小颜色 
         <br>
-        不同以往的白板以及待办，我们这里没有自由画笔🖌，一切都是widget，
-        您可以自由创建拖动widget，widget的内容是通过模板来添加的。
-        没有添加的按键，一切都是快捷键操作！
+        右下角改变大小
         <br>
-        以下是快捷键列表<br><br>（由于技术原因快捷键<span>Ctrl</span>需要最后按才可以🌚 知道如何解决的朋友可以私信）
-        <br><br>
-        需要添加widget的时候按 <span>A</span> +<span>D</span>+<span>Ctrl</span>
-        <br><br>
-        需要添加widget的时候按 <span></span> +<span>A</span>+<span>Ctrl</span>
-        <br><br>
-        需要需要帮助的时候按 <span>H</span> +<span>Ctrl</span>
-        <br>
-        👋 Drag me!
+        插入图片
+       
     </div>
 </template>
   
 <script setup lang="ts" name="myWidget">
 import { ref, onMounted } from 'vue'
 import { useMouse, useCounter } from '@vueuse/core'
-import { useDraggable ,useIntervalFn} from '@vueuse/core'
+import { useDraggable ,useIntervalFn } from '@vueuse/core'
 import { rand } from '@vueuse/shared'
 const greetings = ['Hello', 'Hi', 'Yo!', 'Hey', 'Hola', 'こんにちは', 'Bonjour', 'Salut!', '你好', 'Привет']
 const word = ref('Hello')
 const { pause, resume, isActive } = useIntervalFn(() => {
-  word.value = greetings[rand(0, greetings.length - 1)]
+  word.value =  new Date().toISOString().split('T')[0] + " "+new Date().toISOString().split('T')[1].substring(0,8)
 }, 800)
 
 // const { x, y } = useMouse()
@@ -39,7 +30,7 @@ const el = ref<HTMLElement | null>(null)
 
 // `style` will be a helper computed for `left: ?px; top: ?px;`
 const { x, y, style } = useDraggable(el, {
-    initialValue: { x: 40, y: 40 },
+    initialValue: { x: 40, y: 540 },
 })
 
 onMounted: () => {

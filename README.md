@@ -8,7 +8,7 @@
 存储使用useStorage，
 拖拽使用useDraggable。
 
-
+代码环境是 vue3 ts 代码 ，我有div 用来存放文本，请帮我实现以下功能双击div进入编辑模式，编辑模式可以修改文字大小颜色字体
 
 Starter for [Vite](https://github.com/vuejs/vite) + [VueUse](https://github.com/vueuse/vueuse) + [TypeScript](https://www.typescriptlang.org/)
 

@@ -1,10 +1,10 @@
 <template>
-  <Draggable v-slot="{ x, y }" p="x-4 y-2" border="~ gray-400/30 rounded" shadow="~ hover:lg" class="widget"
-    :storage-key="message"
-    storage-type="local" :initial-value="{ x: 1000 / 3.6, y: 240 }"
-    :prevent-default="true" :handle="handle">
+  <Draggable v-slot="{ x, y }" p="x-4 y-2" border="~ gray-400/30 rounded" shadow="~ hover:lg" class="widget demo"
+    :storage-key="message" storage-type="local" :initial-value="{ x: 1000 / 3.6, y: 240 }" :prevent-default="true"
+    :handle="handle">
+    
     <div ref="handle" class="drag">
-      👋 
+      👋
     </div>
     <div class="text-xs opacity-50">
       Handle that triggers the drag event
@@ -17,33 +17,37 @@
   
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted } from 'vue'
+import { useStyleTag } from '@vueuse/core'
 import { UseDraggable as Draggable } from '@vueuse/components'
 const props = defineProps({
   message: String
 })
-
+ 
 const handle = ref<HTMLElement | null>(null)
 
 </script>
   
 <style scoped>
-.widget:hover .drag{
- opacity: 1; 
+.widget:hover .drag {
+  opacity: 1;
 }
-.widget:active .drag{
-  opacity:1;
+
+.widget:active .drag {
+  opacity: 1;
 }
-.drag{
-  opacity:0;
+
+.drag {
+  opacity: 0;
   padding: 2px 2px;
   border-radius: 10px;
   width: 50px;
-  background: #88888847;
+  background: #888888a1;
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: -30px;
   transition: all linear .3s;
 }
+
 /* 未拖动时候样式 */
 .widget {
   position: fixed;
@@ -51,7 +55,7 @@ const handle = ref<HTMLElement | null>(null)
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0 0 8px rgba(104, 244, 128, 0.5);
-  
+
   transition: background linear .2s;
   transition: box-shadow linear .2s;
 }
