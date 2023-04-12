@@ -44,7 +44,7 @@ const handle = ref<HTMLElement | null>(null)
   background: #888888a1;
   position: absolute;
   right: 10px;
-  top: -30px;
+  top: -35px;
   transition: all linear .3s;
 }
 

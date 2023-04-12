@@ -4,7 +4,6 @@
       <code v-for="key in keys" :key="key" class="font-mono">
               {{ key.replace("key", "") }}
             </code>
-
     </div>
     <div> {{ msg }}</div>
     <myWidget :class="{ hidden: help }"> </myWidget>
@@ -13,7 +12,7 @@
     <template v-for="w in widgets">
       <MyWidget v-bind:message="w.id"></MyWidget>
     </template>
-
+    <Size></Size>
   </div>
 </template>
 <!-- 模块增删部分 -->
@@ -25,14 +24,16 @@ import { useKeyModifier, useMagicKeys, whenever, useTimeout } from '@vueuse/core
 import myWidget from './Widget.vue'
 import TodoWidget from './ToDoWidget.vue'
 import MyWidget from './MyWidget.vue'
+import Size from './Size.vue'
+
 import { Guid } from 'guid-typescript';
 import { useStorage } from '@vueuse/core'
+// 平台服务
 
-var help = ref(false);
 const msg = ref("");
-const list = [{ id: "eee" }, { id: "eee22" }]
 
 
+//组件相关
 const widgets = useStorage('whiteboard-widgets', [])
 const showMsg = (m: string) => {
   msg.value = m
@@ -49,6 +50,7 @@ const addWidget = (v: never) => {
 
 
 // 热键部分
+var help = ref(false);
 const { ctrl_a_d, ctrl_h, current } = useMagicKeys()
 const keys = computed(() => {
  var newList :any[]= [];

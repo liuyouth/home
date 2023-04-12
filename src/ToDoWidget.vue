@@ -2,7 +2,9 @@
     <div ref="el" :style="style" style="width: 320px;" class="widget">
         ⏱️ {{word}}
         <br>
-        双击进入编辑模式 修改字体大小颜色 
+        <h3>双击进入编辑模式 修改字体大小颜色 </h3>
+        · 双击可以编辑文本，使用textarea  和div 切换实现，
+        改变颜色使用定制css 来实现
         <br>
         右下角改变大小
         <br>
