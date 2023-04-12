@@ -1,6 +1,6 @@
 <template>
-  <Draggable :style="{ height: h + 'px', width: w + 'px' }" v-slot="{ x, y }" p="x-4 y-2" border="~ gray-400/30 rounded"
-    shadow="~ hover:lg" class="widget demo" :storage-key="id" storage-type="local"
+  <Draggable :style="{ height: us.h + 'px', width: us.w + 'px' }" v-slot="{ x, y }" p="x-4 y-2" border="~ gray-400/30 rounded"
+    shadow="~ hover:lg" class="widget demo" :storage-key="'xy'+id" storage-type="local"
     :initial-value="{ x: 1000 / 3.6, y: 240 }" :prevent-default="true" :handle="handle">
 
     <div ref="handle" class="drag">
@@ -30,23 +30,22 @@
   
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted, watch } from 'vue'
-import { useStyleTag, useMousePressed, whenever, useMouse } from '@vueuse/core'
+import { useStyleTag, useMousePressed, whenever, useMouse,useStorage } from '@vueuse/core'
 import { UseDraggable as Draggable } from '@vueuse/components'
 const props = defineProps({
   id: String
 })
-const h = ref(100)
-const w = ref(200)
 
+const us = useStorage('wh'+props.id,{w:150,h:100});
 const handle = ref<HTMLElement | null>(null)
-
+ 
 
 
 
 const um = useMouse()
 const el = ref(null)
-const oldx = ref(w.value)
-const oldy = ref(h.value)
+const oldx = ref(us.value.w)
+const oldy = ref(us.value.h)
 const { pressed } = useMousePressed({ target: el })
 watch(pressed, () => {
   console.log("eeee " + pressed.value)
@@ -60,8 +59,8 @@ watch(pressed, () => {
 })
 const changeSize = (xx, yy) => {
   if (pressed.value) {
-    h.value = h.value + (um.y.value - oldy.value)
-    w.value = w.value + (um.x.value - oldx.value)
+    us.value.h = us.value.h + (um.y.value - oldy.value)
+    us.value.w = us.value.w + (um.x.value - oldx.value)
 
     console.log("x " + (um.x.value - oldx.value))
     console.log("y " + (um.y.value - oldy.value))
