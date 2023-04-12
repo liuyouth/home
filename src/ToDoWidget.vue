@@ -2,15 +2,16 @@
     <div ref="el" :style="style" style="width: 320px;" class="widget">
         ⏱️ {{word}}
         <br>
-        <h3></h3>
-         
+        <h3>现在的修改文字是格式布局比较难弄</h3>
+         解决办法可能是每个widget 只有一行字 自动居中 不使用 textarea 展示
         <br>
         <h3>修改字体大小颜色</h3>
         鼠标移动上去显示控制条，目前有拖动，需要新增 编辑按钮，点击编辑后右侧出来div 可以编辑css 改变颜色使用定制css 来实现
 
         <br>
         插入图片
-       
+       有个min widget 的想法，就是每个文字 每个图片都是自定义的 都是可以拖动的，但是他们是属于一个大widget的
+       每个文字 每个图片都可以选择 样式 
     </div>
 </template>
   
