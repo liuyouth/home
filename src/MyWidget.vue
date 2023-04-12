@@ -1,8 +1,8 @@
 <template>
   <Draggable v-slot="{ x, y }" p="x-4 y-2" border="~ gray-400/30 rounded" shadow="~ hover:lg" class="widget demo"
-    :storage-key="message" storage-type="local" :initial-value="{ x: 1000 / 3.6, y: 240 }" :prevent-default="true"
+    :storage-key="id" storage-type="local" :initial-value="{ x: 1000 / 3.6, y: 240 }" :prevent-default="true"
     :handle="handle">
-    
+
     <div ref="handle" class="drag">
       👋
     </div>
@@ -20,9 +20,9 @@ import { ref, onMounted } from 'vue'
 import { useStyleTag } from '@vueuse/core'
 import { UseDraggable as Draggable } from '@vueuse/components'
 const props = defineProps({
-  message: String
+  id: String
 })
- 
+
 const handle = ref<HTMLElement | null>(null)
 
 </script>

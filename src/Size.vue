@@ -3,7 +3,7 @@
         <!-- 点击的 div -->
         <div @click="handleClick" ref="el" :style="{ backgroundColor: '#000fff', height: '30px', width: '30px' }" style="position: absolute;bottom: 0;right: 0;
           ">
-            Click me
+            📐
             <br> x: {{ x }}
             y: {{ y }}
         </div>

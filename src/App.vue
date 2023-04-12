@@ -10,7 +10,7 @@
    
     <TodoWidget/>
     <template v-for="w in widgets">
-      <MyWidget v-bind:message="w.id"></MyWidget>
+      <MyWidget v-bind:id="w.id"></MyWidget>
     </template>
     <Size></Size>
   </div>
