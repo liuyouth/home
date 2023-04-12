@@ -4,7 +4,12 @@
 <img src='./src/logo.svg' height='120'/>
 </p>
 你是一个vue高级工程师，请帮我实现以下需求。
-使用vue3 Vite VueUse 写一个可以添加的div的白板页面，要求点击div右上角可以拖动改变位置，点击div右下角可以改变大小尺寸，刷新页面需要复现之前的位置和大小。 div添加后需要随机一个颜色作为背景 。
+使用vue3 Vite VueUse 写一个通过点击div右下角可以拖动改变div大小的尺寸，
+使用 <script setup lang="ts">使用 vueuse 的库 useMouse useMousePressed 
+实现记录点击位置然后拖动时候实时计算与点击位置之间的差距，然后将差距实时添加在被点击的div的宽高上面
+
+
+要求点击div右上角可以拖动改变位置，点击div右下角可以改变大小尺寸，刷新页面需要复现之前的位置和大小。 div添加后需要随机一个颜色作为背景 。
 存储使用useStorage，
 拖拽使用useDraggable。
 
