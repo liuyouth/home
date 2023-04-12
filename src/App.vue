@@ -12,7 +12,7 @@
     <template v-for="w in widgets">
       <MyWidget v-bind:id="w.id"></MyWidget>
     </template>
-    <Size></Size>
+    
   </div>
 </template>
 <!-- 模块增删部分 -->
@@ -24,7 +24,7 @@ import { useKeyModifier, useMagicKeys, whenever, useTimeout } from '@vueuse/core
 import myWidget from './Widget.vue'
 import TodoWidget from './ToDoWidget.vue'
 import MyWidget from './MyWidget.vue'
-import Size from './Size.vue'
+ 
 
 import { Guid } from 'guid-typescript';
 import { useStorage } from '@vueuse/core'
