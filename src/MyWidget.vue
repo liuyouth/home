@@ -1,20 +1,20 @@
 <template>
-  <Draggable :style="{ height: us.h + 'px', width: us.w + 'px' }" v-slot="{ x, y }" p="x-4 y-2" border="~ gray-400/30 rounded"
-    shadow="~ hover:lg" class="widget demo" :storage-key="'xy'+id" storage-type="local"
+  <Draggable :style="{ height: us.h + 'px', width: us.w + 'px' }" v-slot="{ x, y }" p="x-4 y-2"
+    border="~ gray-400/30 rounded" shadow="~ hover:lg" class="widget demo" :storage-key="'xy' + id" storage-type="local"
     :initial-value="{ x: 1000 / 3.6, y: 240 }" :prevent-default="true" :handle="handle">
 
     <div ref="handle" class="drag">
       👋
     </div>
-    <div>
-      <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+    <div style="height:100%">
+      <!-- <div class="text-xs opacity-50">
+
+        {{ usTxt }}
+      </div> -->
+      <textarea v-model="usTxt" name="" id=""  >
+      </textarea>
     </div>
-    <div class="text-xs opacity-50">
-      Handle that triggers the drag event
-    </div>
-    <div class="text-sm opacity-50">
-      I am at {{ Math.round(x) }}, {{ Math.round(y) }}
-    </div>
+
 
 
 
@@ -30,15 +30,15 @@
   
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted, watch } from 'vue'
-import { useStyleTag, useMousePressed, whenever, useMouse,useStorage } from '@vueuse/core'
+import { useStyleTag, useMousePressed, whenever, useMouse, useStorage } from '@vueuse/core'
 import { UseDraggable as Draggable } from '@vueuse/components'
 const props = defineProps({
   id: String
 })
 
-const us = useStorage('wh'+props.id,{w:150,h:100});
+const us = useStorage('wh' + props.id, { w: 150, h: 100 });
 const handle = ref<HTMLElement | null>(null)
- 
+const usTxt = useStorage("txt"+props.id,"点击 我改变文本");
 
 
 
@@ -80,6 +80,15 @@ watch(um.y, () => {
 </script>
   
 <style scoped>
+textarea{
+  background: transparent;
+  border: 0;
+  resize: none;
+  width: 100%;
+  height: 100%;
+  font-size: 1.2rem;
+  color: rgba(80, 80, 80, 0.826);
+}
 .widget:hover .drag {
   opacity: 1;
 }
@@ -87,6 +96,7 @@ watch(um.y, () => {
 .widget:active .drag {
   opacity: 1;
 }
+
 .widget:hover .resize {
   opacity: 1;
 }
