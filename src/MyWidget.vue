@@ -6,18 +6,17 @@
     <div ref="handle" class="drag">
       👋
     </div>
-    <div style="height:100%">
+    <div style="height:100%;position: relative;">
       <!-- <div class="text-xs opacity-50">
 
         {{ usTxt }}
       </div> -->
-      <textarea v-model="usTxt" name="" id=""  >
+      <textarea v-model="usTxt" name="" id="" disabled="false"  >
       </textarea>
+      <MinWidget :id="'min'+id" v-bind:ppx="x+us.w" v-bind:ppy="y+us.h"  />
     </div>
 
-
-
-
+  
 
 
 
@@ -32,6 +31,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { useStyleTag, useMousePressed, whenever, useMouse, useStorage } from '@vueuse/core'
 import { UseDraggable as Draggable } from '@vueuse/components'
+import MinWidget from './MinWidget.vue';
 const props = defineProps({
   id: String
 })

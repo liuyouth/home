@@ -9,6 +9,7 @@
     <myWidget :class="{ hidden: help }"> </myWidget>
    
     <TodoWidget/>
+ 
     <template v-for="w in widgets">
       <MyWidget v-bind:id="w.id"></MyWidget>
     </template>
@@ -22,6 +23,7 @@
 import { ref, computed, watch } from 'vue'
 import { useKeyModifier, useMagicKeys, whenever, useTimeout } from '@vueuse/core'
 import myWidget from './Widget.vue'
+import MinWidget from './MinWidget.vue'
 import TodoWidget from './ToDoWidget.vue'
 import MyWidget from './MyWidget.vue'
  
