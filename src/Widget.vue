@@ -14,7 +14,7 @@
         <br><br>
         需要添加widget的时候按 <span>A</span> +<span>D</span>+<span>Ctrl</span>
         <br><br>
-        需要添加widget的时候按 <span></span> +<span>A</span>+<span>Ctrl</span>
+        在widget内的minwidget删除时候先点击一下widget然后按下  <span>del</span> 即可
         <br><br>
         需要需要帮助的时候按 <span>H</span> +<span>Ctrl</span>
         <br>

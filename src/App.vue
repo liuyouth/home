@@ -58,10 +58,10 @@ const keys = computed(() => {
  var newList :any[]= [];
  current.forEach((s)=>{
   if(-1!==s.indexOf("Key")){
-    console.log("key "+s)
+    // console.log("key "+s)
     newList.push(s.substring(3,s.length))
   }else {
-    console.log("nokey "+s)
+    // console.log("nokey "+s)
     newList.push(s)
   }
  })

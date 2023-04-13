@@ -28,13 +28,13 @@
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted, watch } from 'vue'
 import { useStyleTag, useMousePressed, whenever, useMouse, useStorage ,useDraggable} from '@vueuse/core'
- 
+ const emit =defineEmits(['clickId'])
 const props = defineProps({
   id: String
   ,ppx:Number
   ,ppy:Number
 })
-
+ 
 const us = useStorage('wh' + props.id, { w: 150, h: 100 });
 const minel = ref<HTMLElement | null>(null)
   const mintop = ref(10)
@@ -50,6 +50,8 @@ const parentChange = (parentx,parenty)=>{
   mintop.value = (mud.y.value-props.ppy)+parenty-oldpy.value
 }
 const minChange=(minx,miny)=>{
+  
+  emit('clickId',props.id)
   minleft.value = (minx-props.ppx)
   mintop.value = (miny-props.ppy)
 }
@@ -68,8 +70,9 @@ const { pressed } = useMousePressed({ target: el })
  
 watch(pressed, () => {
 
+  emit('clickId',props.id)
   if (pressed.value) {
-    
+    props.clickId= props.id
     oldx.value = (minum.x.value-props.ppx);
     oldy.value = (minum.y.value-props.ppy);
     

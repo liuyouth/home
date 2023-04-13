@@ -5,7 +5,8 @@
 
 
     <div class="controlbar row">
-      
+
+      <div class="button">❌</div>
       <div class="button">🌄</div>
       <div class="button">📝</div>
       <div ref="handle" class="button">👋</div>
@@ -16,8 +17,9 @@
         {{ usTxt }}
       </div> -->
       <textarea v-model="usTxt" name="" id="" disabled="false">
-        </textarea>
-      <MinWidget :id="'min' + id" v-bind:ppx="x" v-bind:ppy="y" />
+            </textarea>
+      <MinWidget :id="'min' + id" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
+      <MinWidget :id="'min2' + id" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
     </div>
 
 
@@ -33,13 +35,28 @@
   
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted, watch } from 'vue'
-import { useStyleTag, useMousePressed, whenever, useMouse, useStorage } from '@vueuse/core'
+import { useStyleTag, useMagicKeys, useMousePressed, whenever, useMouse, useStorage } from '@vueuse/core'
 import { UseDraggable as Draggable } from '@vueuse/components'
 import MinWidget from './MinWidget.vue';
 import { Guid } from 'guid-typescript';
+const clickid = ref("")
+const clickId = (cid: String) => {
+  clickid.value = cid.toString()
 
+}
+const { Delete } = useMagicKeys()
+watch(Delete, () => {
+  
+  if (clickid.value !== "") {
+    console.log("ddd "+ clickid.value)
+    widgets.value = widgets.value.filter(i => i.id !== clickid.value);
+    clickid.value = ""
+  }
+})
+
+// widgets 数组中找到widget.id == "23"的进行删除
 //组件相关
-const widgets = useStorage('min-widgets'+props.id, [])
+const widgets = useStorage('min-widgets' + props.id, [])
 
 const props = defineProps({
   id: String
