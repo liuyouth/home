@@ -3,17 +3,12 @@
 <p align='center'>
 <img src='./src/logo.svg' height='120'/>
 </p>
-你是一个vue高级工程师，请帮我实现以下需求。
-使用vue3 Vite VueUse 写一个通过点击div右下角可以拖动改变div大小的尺寸，
-使用 <script setup lang="ts">使用 vueuse 的库 useMouse useMousePressed 
-实现记录点击位置然后拖动时候实时计算与点击位置之间的差距，然后将差距实时添加在被点击的div的宽高上面
+## 效果预览
+<img src='./src/imgs/BlueDream.png' height='120'/>
+<img src='./src/imgs/BlueDream2.png' height='120'/>
 
 
-要求点击div右上角可以拖动改变位置，点击div右下角可以改变大小尺寸，刷新页面需要复现之前的位置和大小。 div添加后需要随机一个颜色作为背景 。
-存储使用useStorage，
-拖拽使用useDraggable。
 
-代码环境是 vue3 ts 代码 ，我有div 用来存放文本，请帮我实现以下功能双击div进入编辑模式，编辑模式可以修改文字大小颜色字体
 
 Starter for [Vite](https://github.com/vuejs/vite) + [VueUse](https://github.com/vueuse/vueuse) + [TypeScript](https://www.typescriptlang.org/)
 
