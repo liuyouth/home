@@ -7,7 +7,7 @@
     <!-- <div  class="drag">
       👋
     </div> -->
-  <img src="./logo.svg" alt="" ref="minel">
+  <img src="./logo.svg" alt="" ref="minel" draggable="false">
   <!-- {{ ppx }} + {{ ppy }}
      <br>
      {{ mud.x }} + {{ mud.y }}
