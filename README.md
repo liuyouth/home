@@ -4,8 +4,8 @@
 <img src='./src/logo.svg' height='120'/>
 </p>
 ## 效果预览
-<img src='./src/imgs/BlueDream.png' height='120'/>
-<img src='./src/imgs/BlueDream2.png' height='120'/>
+<img src='./src/imgs/BlueDream.png' width='100%'/>
+<img src='./src/imgs/BlueDream2.png' width='100%'/>
 
 
 
