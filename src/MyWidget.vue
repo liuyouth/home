@@ -3,20 +3,24 @@
     border="~ gray-400/30 rounded" shadow="~ hover:lg" class="widget demo" :storage-key="'xy' + id" storage-type="local"
     :initial-value="{ x: 1000 / 3.6, y: 240 }" :prevent-default="true" :handle="handle">
 
-    <div ref="handle" class="drag">
-      👋
+
+    <div class="controlbar row">
+      
+      <div class="button">🌄</div>
+      <div class="button">📝</div>
+      <div ref="handle" class="button">👋</div>
     </div>
     <div style="height:100%;position: relative;">
       <!-- <div class="text-xs opacity-50">
 
         {{ usTxt }}
       </div> -->
-      <textarea v-model="usTxt" name="" id="" disabled="false"  >
-      </textarea>
-      <MinWidget :id="'min'+id" v-bind:ppx="x+us.w" v-bind:ppy="y+us.h"  />
+      <textarea v-model="usTxt" name="" id="" disabled="false">
+        </textarea>
+      <MinWidget :id="'min' + id" v-bind:ppx="x" v-bind:ppy="y" />
     </div>
 
-  
+
 
 
 
@@ -32,13 +36,18 @@ import { ref, onMounted, watch } from 'vue'
 import { useStyleTag, useMousePressed, whenever, useMouse, useStorage } from '@vueuse/core'
 import { UseDraggable as Draggable } from '@vueuse/components'
 import MinWidget from './MinWidget.vue';
+import { Guid } from 'guid-typescript';
+
+//组件相关
+const widgets = useStorage('min-widgets'+props.id, [])
+
 const props = defineProps({
   id: String
 })
 
 const us = useStorage('wh' + props.id, { w: 150, h: 100 });
 const handle = ref<HTMLElement | null>(null)
-const usTxt = useStorage("txt"+props.id,"点击 我改变文本");
+const usTxt = useStorage("txt" + props.id, "点击 我改变文本");
 
 
 
@@ -80,7 +89,7 @@ watch(um.y, () => {
 </script>
   
 <style scoped>
-textarea{
+textarea {
   background: transparent;
   border: 0;
   resize: none;
@@ -89,11 +98,12 @@ textarea{
   font-size: 1.2rem;
   color: rgba(80, 80, 80, 0.826);
 }
-.widget:hover .drag {
+
+.widget:hover .controlbar {
   opacity: 1;
 }
 
-.widget:active .drag {
+.widget:active .controlbar {
   opacity: 1;
 }
 
@@ -116,17 +126,22 @@ textarea{
   cursor: nwse-resize;
 }
 
-.drag {
-  padding: 3px;
+.controlbar {
   opacity: 0;
-  padding: 2px 2px;
-  border-radius: 10px;
-  width: 50px;
-  background: #888888a1;
   position: absolute;
   right: 10px;
   top: -35px;
   transition: all linear .3s;
+}
+
+.button {
+
+  margin: 2px;
+  padding: 2px 2px;
+  border-radius: 10px;
+  width: 50px;
+  background: #888888a1;
+
   cursor: pointer;
 }
 

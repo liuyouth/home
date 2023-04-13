@@ -6,3 +6,12 @@
   color: #2c3e50;
  
 }
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}

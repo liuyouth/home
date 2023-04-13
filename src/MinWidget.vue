@@ -1,16 +1,18 @@
 <template>
-  <div :style="{ height: us.h + 'px', width: us.w + 'px' ,top:(mud.y.value+ppy)+'px',left:(mud.x.value+ppx)+'px'}"   
+  <div :style="{ height: us.h + 'px', width: us.w + 'px' ,top:mintop+'px',left:minleft+'px'}"   
     class="min-widget demo"
      :storage-key="'xy' + id" storage-type="local" 
      >
-     {{ mud.x }} + {{ mud.y }}
-     <br>
-     {{ mud.x.value+ppx }} + {{ mud.y.value+ppy }}
+    
     <!-- <div  class="drag">
       👋
     </div> -->
   <img src="./logo.svg" alt="" ref="minel">
-
+  <!-- {{ ppx }} + {{ ppy }}
+     <br>
+     {{ mud.x }} + {{ mud.y }}
+     <br>
+     {{ mud.x.value-ppx }} + {{ mud.y.value-ppy }} -->
 
 
   
@@ -21,7 +23,8 @@
     </div>
   </div>
 </template>
-  
+  // 需要考虑子父组件分别被拖动的情况，子组件拖动 全局xy - 父组件xy 得到相对父组件位置
+  // 父组件拖动 子组件的相对位置 + 被改变的位置  
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted, watch } from 'vue'
 import { useStyleTag, useMousePressed, whenever, useMouse, useStorage ,useDraggable} from '@vueuse/core'
@@ -34,11 +37,26 @@ const props = defineProps({
 
 const us = useStorage('wh' + props.id, { w: 150, h: 100 });
 const minel = ref<HTMLElement | null>(null)
+  const mintop = ref(10)
+  const minleft = ref(10)
 const mud = useDraggable(minel, {
-  initialValue: { x: 10, y: 10 },
+  initialValue: { x: mintop.value, y: minleft.value },
 })
 const usTxt = useStorage("txt"+props.id,"点击 我改变文本");
-
+const oldpx = ref(props.ppx)
+const oldpy = ref(props.ppy)
+const parentChange = (parentx,parenty)=>{
+  minleft.value = (mud.x.value-props.ppx)+parentx-oldpx.value
+  mintop.value = (mud.y.value-props.ppy)+parenty-oldpy.value
+}
+const minChange=(minx,miny)=>{
+  minleft.value = (minx-props.ppx)
+  mintop.value = (miny-props.ppy)
+}
+watch(mud.x,()=>minChange(mud.x.value,mud.y.value))
+watch(mud.y,()=>minChange(mud.x.value,mud.y.value))
+watch(props.ppx,()=>parentChange(props.ppx,props.ppy))
+watch(props.ppy,()=>parentChange(props.ppx,props.ppy))
 
 
 
@@ -51,10 +69,10 @@ const { pressed } = useMousePressed({ target: el })
 watch(pressed, () => {
 
   if (pressed.value) {
-    console.log("xxxx " + (minum.x.value - props.ppx))
+    
     oldx.value = (minum.x.value-props.ppx);
     oldy.value = (minum.y.value-props.ppy);
-    console.log("dddw"+oldx.value)
+    
   } else {
     // console.log("x "+(x.value - oldx.value))
     // console.log("y "+(y.value - oldy.value))
@@ -66,9 +84,6 @@ const changeSize = (xx, yy) => {
   if (pressed.value) {
     us.value.h = us.value.h + (yy - oldy.value)
     us.value.w = us.value.w + (xx - oldx.value)
-
-    console.log("x " + (xx - oldx.value))
-    console.log("y " + (yy - oldy.value))
     oldx.value = xx;
     oldy.value = yy;
   } else {

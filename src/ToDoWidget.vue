@@ -11,6 +11,12 @@
         <br>
         插入图片
        有个min widget 的想法，
+       min widget 添加是用父组件的按钮实现的， 可以添加单个 文本 单个图片 
+       MyWidget 持久化minwidget 列表
+       MyWidget 添加 文本 添加图片 MinWidget
+       修改文本  暂时使用 input 实现
+       图片不可修改，可以删除widget 然后在新建
+       新建图片 出现addWidget 可以通过网络连接加载，也可以通过本地上传。
        ** minwidget 的x y 坐标需要经过换算，直接用组件不行
        就是每个文字 每个图片都是自定义的 都是可以拖动的，但是他们是属于一个大widget的
        每个文字 每个图片都可以选择 样式 
