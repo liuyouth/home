@@ -15,10 +15,12 @@
         插入图片
        有个min widget 的想法，
        min widget 添加是用父组件的按钮实现的， 可以添加
-       单个 文本 
-       单个图片 
+       单个 文本 变大缩小情况 使用flex布局实现文本上下句中
+       单个图片  变大需要从宽度盛满变成高度盛满，这样容易兼容 文本上下句中的情况
        MyWidget 持久化minwidget 列表
-       MyWidget 添加 文本 添加图片 MinWidget
+       MyWidget 添加 文本 
+       添加图片 MinWidget
+   
        修改文本  暂时使用 input 实现
        图片不可修改，可以删除widget 然后在新建
        新建图片 出现addWidget 可以通过网络连接加载，也可以通过本地上传。

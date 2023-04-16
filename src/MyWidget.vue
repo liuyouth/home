@@ -19,7 +19,7 @@
       <textarea v-model="usTxt" name="" id="" disabled="false">
             </textarea>
       <MinWidget :id="'min' + id" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
-      <MinWidget :id="'min2' + id" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
+      <MinWidget :id="'min2' + id" :isImg="true" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
     </div>
 
 

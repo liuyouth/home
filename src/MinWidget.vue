@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ height: us.h + 'px', width: us.w + 'px' ,top:mintop+'px',left:minleft+'px'}"   
+  <div :style="{ height: us.h + 'px', width: us.w + 'px' ,top:us.top+'px',left:us.left+'px'}"   
     class="min-widget demo"
      :storage-key="'xy' + id" storage-type="local" 
      >
@@ -7,7 +7,8 @@
     <!-- <div  class="drag">
       👋
     </div> -->
-  <img src="./logo.svg" alt="" ref="minel" draggable="false">
+  <div v-if="!isImg" ref="minel" >三生三世 </div>
+  <img v-if="isImg" src="./logo.svg" alt="" ref="minel" draggable="false">
   <!-- {{ ppx }} + {{ ppy }}
      <br>
      {{ mud.x }} + {{ mud.y }}
@@ -19,7 +20,6 @@
 
     <div ref="el" class="resize">
       <img src="./imgs/resize.png" style="width: 88%;opacity: .5;" alt="">
-
     </div>
   </div>
 </template>
@@ -33,27 +33,28 @@ const props = defineProps({
   id: String
   ,ppx:Number
   ,ppy:Number
+  ,isImg:Boolean
 })
- 
-const us = useStorage('wh' + props.id, { w: 150, h: 100 });
+
+// us控制大小
+const us = useStorage('minwdiget' + props.id, { w: 150, h: 100 ,top:10,left:10});
 const minel = ref<HTMLElement | null>(null)
-  const mintop = ref(10)
-  const minleft = ref(10)
+ 
 const mud = useDraggable(minel, {
-  initialValue: { x: mintop.value, y: minleft.value },
+  initialValue: { x: us.value.left, y: us.value.top },
 })
 const usTxt = useStorage("txt"+props.id,"点击 我改变文本");
 const oldpx = ref(props.ppx)
 const oldpy = ref(props.ppy)
 const parentChange = (parentx,parenty)=>{
-  minleft.value = (mud.x.value-props.ppx)+parentx-oldpx.value
-  mintop.value = (mud.y.value-props.ppy)+parenty-oldpy.value
+  us.value.left = (mud.x.value-props.ppx)+parentx-oldpx.value
+  us.value.top = (mud.y.value-props.ppy)+parenty-oldpy.value
 }
 const minChange=(minx,miny)=>{
   
   emit('clickId',props.id)
-  minleft.value = (minx-props.ppx)
-  mintop.value = (miny-props.ppy)
+  us.value.left = (minx-props.ppx)
+  us.value.top = (miny-props.ppy)
 }
 watch(mud.x,()=>minChange(mud.x.value,mud.y.value))
 watch(mud.y,()=>minChange(mud.x.value,mud.y.value))
