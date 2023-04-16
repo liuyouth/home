@@ -1,6 +1,7 @@
 <template>
     <div ref="el" :style="style" style="width: 320px;" class="widget">
         ⏱️ {{word}}
+        白板要有页面的区分，学习白板 ，工作白板，等等
         <br>
         整理json结构，组件内控制小组件的管理，小组件一个id存储所有的数据。
         列表只存储id 传入id后在子组件更新数据。
@@ -15,7 +16,7 @@
         插入图片
        有个min widget 的想法，
        min widget 添加是用父组件的按钮实现的， 可以添加
-       单个 文本 
+       单个 文本  右侧有复制的按钮点击可以复制内容
        单个图片 
        MyWidget 持久化minwidget 列表
        MyWidget 添加 文本 添加图片 MinWidget
