@@ -7,14 +7,10 @@
 
 <img src='./src/imgs/BlueDream2.png' width='100%'/>
 
-
-
-
 Starter for [Vite](https://github.com/vuejs/vite) + [VueUse](https://github.com/vueuse/vueuse) + [TypeScript](https://www.typescriptlang.org/)
 
-🌐 [Live Demo](https://vueuse-vite-starter.netlify.app/)
+🌐 [Live Demo]()
 
-📦 [Webpack Example](https://github.com/vueuse/vueuse-vue3-example)
 
 ## Installation
 

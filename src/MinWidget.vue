@@ -8,7 +8,7 @@
       👋
     </div> -->
   <div v-if="!isImg" ref="minel" >三生三世 </div>
-  <img v-if="isImg" src="./logo.svg" alt="" ref="minel" draggable="false">
+  <img v-if="isImg" :src="imgLink" alt="" style="height:100%;width: 100%;" ref="minel" draggable="false">
   <!-- {{ ppx }} + {{ ppy }}
      <br>
      {{ mud.x }} + {{ mud.y }}
@@ -34,6 +34,7 @@ const props = defineProps({
   ,ppx:Number
   ,ppy:Number
   ,isImg:Boolean
+  ,imgLink:String
 })
 
 // us控制大小
