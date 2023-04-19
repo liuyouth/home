@@ -6,9 +6,9 @@
 
     <div class="controlbar row">
 
-      <div class="button">❌</div>
-      <div class="button">🌄</div>
-      <div class="button">📝</div>
+      <div class="button" >❌</div>
+      <div class="button" @click="addClick(true)">🌄</div>
+      <div class="button" @click="addClick(false)" >📝</div>
       <div ref="handle" class="button">👋</div>
     </div>
     <div style="height:100%;position: relative;">
@@ -16,8 +16,12 @@
 
         {{ usTxt }}
       </div> -->
-      <textarea v-model="usTxt" name="" id="" disabled="false">
-            </textarea>
+      <!-- <textarea v-model="usTxt" name="" id="" disabled="false">
+            </textarea> -->
+            <template v-for="w in widgets">
+      <MinWidget v-bind:id="'min'+w.id" :is-img="w.isImg"  v-bind:ppx="x" v-bind:ppy="y" ></MinWidget>
+    </template>
+    
       <MinWidget :id="'min' + id" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
       <MinWidget :id="'min2' + id" :img-link="'https://img.alicdn.com/imgextra/i3/2640093793/O1CN01muaQWv1dtEzpINPlt_!!2640093793.jpg'"  :isImg="true" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
     </div>
@@ -39,6 +43,7 @@ import { useStyleTag, useMagicKeys, useMousePressed, whenever, useMouse, useStor
 import { UseDraggable as Draggable } from '@vueuse/components'
 import MinWidget from './MinWidget.vue';
 import { Guid } from 'guid-typescript';
+// clickid 系列是为了记录最后一次按的组件，然后按下del 会进行删除
 const clickid = ref("")
 const clickId = (cid: String) => {
   clickid.value = cid.toString()
@@ -48,23 +53,31 @@ const { Delete } = useMagicKeys()
 watch(Delete, () => {
   
   if (clickid.value !== "") {
-    console.log("ddd "+ clickid.value)
+    console.log("ddd "+ clickid.value);
     widgets.value = widgets.value.filter(i => i.id !== clickid.value);
-    clickid.value = ""
+    clickid.value = "";
   }
 })
 
-// widgets 数组中找到widget.id == "23"的进行删除
+
 //组件相关
 const widgets = useStorage('min-widgets' + props.id, [])
 
+const addClick = (isImg:Boolean)=>{
+  addWidget({ id: Guid.create().toString(),isImg:isImg});
+}
+const addWidget = (v: never) => {
+  
+  widgets.value = [...widgets.value, v]
+   
+}
 const props = defineProps({
   id: String
 })
 
 const us = useStorage('wh' + props.id, { w: 150, h: 100 });
 const handle = ref<HTMLElement | null>(null)
-const usTxt = useStorage("txt" + props.id, "点击 我改变文本");
+// const usTxt = useStorage("txt" + props.id, "点击 我改变文本");
 
 
 

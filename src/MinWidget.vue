@@ -4,11 +4,19 @@
      :storage-key="'xy' + id" storage-type="local" 
      >
     
-    <!-- <div  class="drag">
-      👋
-    </div> -->
-  <div v-if="!isImg" ref="minel" >三生三世 </div>
-  <img v-if="isImg" :src="imgLink" alt="" style="height:100%;width: 100%;" ref="minel" draggable="false">
+    <div v-if="isImg" class="drag" style="width: 160px;">
+     
+      <input type="text" style="width: 90%;border: 0px;   "  v-model="usImg" >
+    </div>
+    <div  class="drag" style="top：-35px;right:-240px;width: 220px;">
+      <!-- todo 这里的具体位置要随着大小 拖动来动态决定，因为在最右侧或者最左侧时候 显示不出来 -->
+      <textarea name="" id="" cols="30" rows="10" style="width: 100%;">
+        class 
+      </textarea>
+    </div>
+  
+  <input class="showText" type="text" v-if="!isImg" ref="minel" v-model="usTxt">
+  <img v-if="isImg" :src="usImg" alt="" style="height:100%;width: 100%;" ref="minel" draggable="false">
   <!-- {{ ppx }} + {{ ppy }}
      <br>
      {{ mud.x }} + {{ mud.y }}
@@ -27,6 +35,7 @@
   // 父组件拖动 子组件的相对位置 + 被改变的位置  
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted, watch } from 'vue'
+import { Guid } from 'guid-typescript';
 import { useStyleTag, useMousePressed, whenever, useMouse, useStorage ,useDraggable} from '@vueuse/core'
  const emit =defineEmits(['clickId'])
 const props = defineProps({
@@ -34,7 +43,6 @@ const props = defineProps({
   ,ppx:Number
   ,ppy:Number
   ,isImg:Boolean
-  ,imgLink:String
 })
 
 // us控制大小
@@ -45,6 +53,7 @@ const mud = useDraggable(minel, {
   initialValue: { x: us.value.left, y: us.value.top },
 })
 const usTxt = useStorage("txt"+props.id,"点击 我改变文本");
+const usImg = useStorage("img"+props.id,"输入链接");
 const oldpx = ref(props.ppx)
 const oldpy = ref(props.ppy)
 const parentChange = (parentx,parenty)=>{
@@ -105,6 +114,13 @@ watch(minum.y, () => {
 </script>
   
 <style scoped>
+.showText{
+  border:0;
+  font-size: 1.2rem;
+  outline: medium;
+  color: #ffffff;
+  background-color: transparent;
+}
 textarea{
   background: transparent;
   border: 0;
@@ -147,7 +163,7 @@ textarea{
   padding: 2px 2px;
   border-radius: 10px;
   width: 50px;
-  background: #888888a1;
+  background: #ffffffa1;
   position: absolute;
   right: 10px;
   top: -35px;
