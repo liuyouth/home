@@ -163,7 +163,7 @@ textarea{
   padding: 2px 2px;
   border-radius: 10px;
   width: 50px;
-  background: #ffffffa1;
+  background: #bcd0faa1;
   position: absolute;
   right: 10px;
   top: -35px;

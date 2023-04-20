@@ -180,7 +180,7 @@ textarea {
   position: fixed;
   background: #68f480;
   border-radius: 10px;
-  padding: 10px;
+ 
   box-shadow: 0 0 8px rgba(104, 244, 128, 0.5);
 
   transition: background linear .2s;
