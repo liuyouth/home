@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app"  >
     <div class="controller" >
       <code v-for="key in keys" :key="key" class="font-mono">
               {{ key.replace("key", "") }}
@@ -84,6 +84,12 @@ function removeKeyFromMK(MK: string): string {
 </script>
 
 <style scoped>
+/* background: linear-gradient(102.7deg, #fddaff 8.2%, #dfadfc 19.6%, #adcdfc 36.8%, #adfcf4 73.2%, #caf8d0 90.9%); */
+.app{
+  width: 100%;
+  height: 100%;
+  background: #4171b82c;
+}
 html,
 body,
 h1,
@@ -112,10 +118,6 @@ padding:2px 20px;
   opacity: 0;
 }
 
-#app {
-  text-align: center;
-  color: rgba(0, 0, 0, 0.521);
-}
 
 img {
   width: 500px;

@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ height: us.h + 'px', width: us.w + 'px' ,top:us.top+'px',left:us.left+'px'}"   
+  <div @contextmenu="onContextMenu($event)" :style="{ height: us.h + 'px', width: us.w + 'px' ,top:us.top+'px',left:us.left+'px'}"   
     class="min-widget demo"
      :storage-key="'xy' + id" storage-type="local" 
      >
@@ -33,10 +33,41 @@
 </template>
   // 需要考虑子父组件分别被拖动的情况，子组件拖动 全局xy - 父组件xy 得到相对父组件位置
   // 父组件拖动 子组件的相对位置 + 被改变的位置  
+  // 考虑右键菜单自定义，允许输入框在里面
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted, watch } from 'vue'
 import { Guid } from 'guid-typescript';
 import { useStyleTag, useMousePressed, whenever, useMouse, useStorage ,useDraggable} from '@vueuse/core'
+import ContextMenu from '@imengyu/vue3-context-menu'
+
+const onContextMenu = (e : MouseEvent)=> {
+  //prevent the browser's default menu
+  e.preventDefault();
+  //show your menu
+  ContextMenu.showContextMenu({
+    theme: 'mac dark',
+    x: e.x,
+    y: e.y,
+    items: [
+      { 
+        label: "A menu item", 
+        onClick: () => {
+          alert("You click a menu item");
+        }
+      },
+      { 
+        label: "A submenu", 
+        children: [
+          { label: "Item1" },
+          { label: "Item2" },
+          { label: "Item3" },
+        ]
+      },
+    ]
+  });
+ 
+}
+
  const emit =defineEmits(['clickId'])
 const props = defineProps({
   id: String
