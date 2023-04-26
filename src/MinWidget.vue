@@ -1,9 +1,25 @@
 <template>
-  <div @contextmenu="onContextMenu($event)" :style="{ height: us.h + 'px', width: us.w + 'px' ,top:us.top+'px',left:us.left+'px'}"   
+  <div   @contextmenu.prevent.stop="onButtonClick" :style="{ height: us.h + 'px', width: us.w + 'px' ,top:us.top+'px',left:us.left+'px'}"   
+
     class="min-widget demo"
      :storage-key="'xy' + id" storage-type="local" 
      >
-    
+     <context-menu
+  v-model:show="show"
+  :options="optionsComponent"
+>
+  <div>更改图片地址</div>
+  <context-menu-sperator /><!--use this to add sperator-->
+ <div><input type="text"></div>
+  <context-menu-group label="Menu with child">
+    <context-menu-item label="Item1" @click="onMenuClick(2)" />
+    <context-menu-item label="Item2" @click="onMenuClick(3)" />
+    <context-menu-group label="Child with v-for 50">
+      <context-menu-item v-for="index of 50" :key="index" :label="'Item3-'+index" @click="onLoopMenuClick(index)" />
+    </context-menu-group>
+  </context-menu-group>
+</context-menu>
+
     <div v-if="isImg" class="drag" style="width: 160px;">
      
       <input type="text" style="width: 90%;border: 0px;   "  v-model="usImg" >
@@ -38,36 +54,25 @@
 import { ref, onMounted, watch } from 'vue'
 import { Guid } from 'guid-typescript';
 import { useStyleTag, useMousePressed, whenever, useMouse, useStorage ,useDraggable} from '@vueuse/core'
-import ContextMenu from '@imengyu/vue3-context-menu'
-
-const onContextMenu = (e : MouseEvent)=> {
-  //prevent the browser's default menu
-  e.preventDefault();
-  //show your menu
-  ContextMenu.showContextMenu({
-    theme: 'mac dark',
-    x: e.x,
-    y: e.y,
-    items: [
-      { 
-        label: "A menu item", 
-        onClick: () => {
-          alert("You click a menu item");
-        }
-      },
-      { 
-        label: "A submenu", 
-        children: [
-          { label: "Item1" },
-          { label: "Item2" },
-          { label: "Item3" },
-        ]
-      },
-    ]
-  });
  
-}
-
+ const show = ref(false)
+ const  optionsComponent=ref( {
+      zIndex: 3,
+      minWidth: 230,
+      x: 500,
+      y: 200
+    })
+    const  onButtonClick=(e : MouseEvent)=> {
+      console.log( e)
+      e.preventDefault();
+   if(e.button==2){
+    //显示组件菜单
+    show.value = true;
+    optionsComponent.value.x = e.x;
+    optionsComponent.value.y = e.y;
+    
+   }
+  }
  const emit =defineEmits(['clickId'])
 const props = defineProps({
   id: String
