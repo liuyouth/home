@@ -18,10 +18,16 @@
 
 /* //设置所有菜单的字体 */
 .mx-context-menu {
-  font-family: 'Noto Serif', '微软雅黑', serif;
+  width: 260px;
+  background: #ffffff;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 
 /* //设置指定菜单的字体 */
 .my-menu {
-  font-family: 'Noto Serif', '微软雅黑', serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
+
+
+  

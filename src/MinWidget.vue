@@ -1,46 +1,64 @@
 <template>
-  <div   @contextmenu.prevent.stop="onButtonClick" :style="{ height: us.h + 'px', width: us.w + 'px' ,top:us.top+'px',left:us.left+'px'}"   
+  <div @contextmenu.prevent.stop="onButtonClick"
+    :style="{ height: us.h + 'px', width: us.w + 'px', top: us.top + 'px', left: us.left + 'px' }" class="min-widget demo"
+    :storage-key="'xy' + id" storage-type="local">
+    <context-menu v-model:show="show"
+      :options="optionsComponent">
 
-    class="min-widget demo"
-     :storage-key="'xy' + id" storage-type="local" 
-     >
-     <context-menu
-  v-model:show="show"
-  :options="optionsComponent"
->
-  <div>更改图片地址</div>
-  <context-menu-sperator /><!--use this to add sperator-->
- <div><input type="text"></div>
-  <context-menu-group label="Menu with child">
-    <context-menu-item label="Item1" @click="onMenuClick(2)" />
-    <context-menu-item label="Item2" @click="onMenuClick(3)" />
-    <context-menu-group label="Child with v-for 50">
-      <context-menu-item v-for="index of 50" :key="index" :label="'Item3-'+index" @click="onLoopMenuClick(index)" />
-    </context-menu-group>
-  </context-menu-group>
-</context-menu>
 
-    <div v-if="isImg" class="drag" style="width: 160px;">
-     
-      <input type="text" style="width: 90%;border: 0px;   "  v-model="usImg" >
-    </div>
-    <div  class="drag" style="top：-35px;right:-240px;width: 220px;">
-      <!-- todo 这里的具体位置要随着大小 拖动来动态决定，因为在最右侧或者最左侧时候 显示不出来 -->
-      <textarea name="" id="" cols="30" rows="10" style="width: 100%;">
-        class 
-      </textarea>
-    </div>
-  
-  <input class="showText" type="text" v-if="!isImg" ref="minel" v-model="usTxt">
-  <img v-if="isImg" :src="usImg" alt="" style="height:100%;width: 100%;" ref="minel" draggable="false">
-  <!-- {{ ppx }} + {{ ppy }}
+      <context-menu-sperator /><!--use this to add sperator-->
+      <div v-if="isImg" style="width: 250px;padding: 5px ;">
+        <div style="margin-left: 10px; width: 130px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(175, 55, 255,0.28);color:rgb(175,55,255)">
+          更改图片地址
+        </div>
+        
+        <input type="text" style="width: 96%;border: 1px;   " v-model="usImg">
+        <context-menu-sperator /><!--use this to add sperator-->
+      </div>
+      <div style="width: 100%;padding: 5px 15px;" class="row">
+        <div style="width: 70px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(60, 130, 255,0.38);color:rgb(60, 130, 255)">
+          CSS3</div>
+          <div style="margin-left: 10px;width: 170px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(60, 130, 255,0.38);color:rgb(60, 130, 255)">
+          直接输入的css代码 会改变当前div的</div>
+      </div>
+      <div style=" width: 252px;"  >
+        <!-- -->
+        <div style="width: 95%;margin: 0 auto;">
+          <textarea style="border: 2px solid #b8fbc3;width: 100%;" name="" id="" cols="30" rows="10"  textarea/>
+        </div>
+
+      </div>
+      <context-menu-sperator /><!--use this to add sperator-->
+      
+      <context-menu-item > 
+        <div style="width: 60px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(225, 103, 103,0.28);color:rgb(255, 71, 71)">
+          DEL
+        </div>
+        
+      </context-menu-item>
+      <context-menu-sperator /><!--use this to add sperator-->
+      <context-menu-group label="Menu with child">
+        <context-menu-item label="Item1" @click="onMenuClick(2)" />
+        <context-menu-item label="Item2" @click="onMenuClick(3)" />
+        <context-menu-group label="Child with v-for 50">
+          <context-menu-item v-for="index of 50" :key="index" :label="'Item3-' + index" @click="onLoopMenuClick(index)" />
+        </context-menu-group>
+      </context-menu-group>
+    </context-menu>
+
+
+
+
+    <input class="showText" type="text" v-if="!isImg" ref="minel" v-model="usTxt">
+    <img v-if="isImg" :src="usImg" alt="" style="height:100%;width: 100%;" ref="minel" draggable="false">
+    <!-- {{ ppx }} + {{ ppy }}
      <br>
      {{ mud.x }} + {{ mud.y }}
      <br>
      {{ mud.x.value-ppx }} + {{ mud.y.value-ppy }} -->
 
 
-  
+
 
     <div ref="el" class="resize">
       <img src="./imgs/resize.png" style="width: 88%;opacity: .5;" alt="">
@@ -53,59 +71,59 @@
 <script setup lang="ts" name="MyWidget">
 import { ref, onMounted, watch } from 'vue'
 import { Guid } from 'guid-typescript';
-import { useStyleTag, useMousePressed, whenever, useMouse, useStorage ,useDraggable} from '@vueuse/core'
- 
- const show = ref(false)
- const  optionsComponent=ref( {
-      zIndex: 3,
-      minWidth: 230,
-      x: 500,
-      y: 200
-    })
-    const  onButtonClick=(e : MouseEvent)=> {
-      console.log( e)
-      e.preventDefault();
-   if(e.button==2){
+import { useStyleTag, useMousePressed, whenever, useMouse, useStorage, useDraggable } from '@vueuse/core'
+
+const show = ref(false)
+const optionsComponent = ref({
+  zIndex: 3,
+  minWidth: 230,
+  x: 500,
+  y: 200
+})
+const onButtonClick = (e: MouseEvent) => {
+  console.log(e)
+  e.preventDefault();
+  if (e.button == 2) {
     //显示组件菜单
     show.value = true;
     optionsComponent.value.x = e.x;
     optionsComponent.value.y = e.y;
-    
-   }
+
   }
- const emit =defineEmits(['clickId'])
+}
+const emit = defineEmits(['clickId'])
 const props = defineProps({
   id: String
-  ,ppx:Number
-  ,ppy:Number
-  ,isImg:Boolean
+  , ppx: Number
+  , ppy: Number
+  , isImg: Boolean
 })
 
 // us控制大小
-const us = useStorage('minwdiget' + props.id, { w: 150, h: 100 ,top:10,left:10});
+const us = useStorage('minwdiget' + props.id, { w: 150, h: 100, top: 10, left: 10 });
 const minel = ref<HTMLElement | null>(null)
- 
+
 const mud = useDraggable(minel, {
   initialValue: { x: us.value.left, y: us.value.top },
 })
-const usTxt = useStorage("txt"+props.id,"点击 我改变文本");
-const usImg = useStorage("img"+props.id,"输入链接");
+const usTxt = useStorage("txt" + props.id, "点击 我改变文本");
+const usImg = useStorage("img" + props.id, "输入链接");
 const oldpx = ref(props.ppx)
 const oldpy = ref(props.ppy)
-const parentChange = (parentx,parenty)=>{
-  us.value.left = (mud.x.value-props.ppx)+parentx-oldpx.value
-  us.value.top = (mud.y.value-props.ppy)+parenty-oldpy.value
+const parentChange = (parentx, parenty) => {
+  us.value.left = (mud.x.value - props.ppx) + parentx - oldpx.value
+  us.value.top = (mud.y.value - props.ppy) + parenty - oldpy.value
 }
-const minChange=(minx,miny)=>{
-  
-  emit('clickId',props.id)
-  us.value.left = (minx-props.ppx)
-  us.value.top = (miny-props.ppy)
+const minChange = (minx, miny) => {
+
+  emit('clickId', props.id)
+  us.value.left = (minx - props.ppx)
+  us.value.top = (miny - props.ppy)
 }
-watch(mud.x,()=>minChange(mud.x.value,mud.y.value))
-watch(mud.y,()=>minChange(mud.x.value,mud.y.value))
-watch(props.ppx,()=>parentChange(props.ppx,props.ppy))
-watch(props.ppy,()=>parentChange(props.ppx,props.ppy))
+watch(mud.x, () => minChange(mud.x.value, mud.y.value))
+watch(mud.y, () => minChange(mud.x.value, mud.y.value))
+watch(props.ppx, () => parentChange(props.ppx, props.ppy))
+watch(props.ppy, () => parentChange(props.ppx, props.ppy))
 
 
 
@@ -114,23 +132,23 @@ const el = ref(null)
 const oldx = ref(us.value.w)
 const oldy = ref(us.value.h)
 const { pressed } = useMousePressed({ target: el })
- 
+
 watch(pressed, () => {
 
-  emit('clickId',props.id)
+  emit('clickId', props.id)
   if (pressed.value) {
-    props.clickId= props.id
-    oldx.value = (minum.x.value-props.ppx);
-    oldy.value = (minum.y.value-props.ppy);
-    
+    props.clickId = props.id
+    oldx.value = (minum.x.value - props.ppx);
+    oldy.value = (minum.y.value - props.ppy);
+
   } else {
     // console.log("x "+(x.value - oldx.value))
     // console.log("y "+(y.value - oldy.value))
   }
 })
 const changeSize = (xx, yy) => {
-  xx = xx -props.ppx
-  yy = yy -props.ppy
+  xx = xx - props.ppx
+  yy = yy - props.ppy
   if (pressed.value) {
     us.value.h = us.value.h + (yy - oldy.value)
     us.value.w = us.value.w + (xx - oldx.value)
@@ -150,14 +168,15 @@ watch(minum.y, () => {
 </script>
   
 <style scoped>
-.showText{
-  border:0;
+.showText {
+  border: 0;
   font-size: 1.2rem;
   outline: medium;
   color: #ffffff;
   background-color: transparent;
 }
-textarea{
+
+textarea {
   background: transparent;
   border: 0;
   resize: none;
@@ -166,6 +185,7 @@ textarea{
   font-size: 1.2rem;
   color: rgba(80, 80, 80, 0.826);
 }
+
 .min-widget:hover .drag {
   opacity: 1;
 }
@@ -223,8 +243,6 @@ textarea{
 }
 
 /* 鼠标悬停时的样式 */
-.min-widget:hover {
-
-}
+.min-widget:hover {}
 </style>
   
