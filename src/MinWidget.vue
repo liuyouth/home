@@ -171,6 +171,7 @@ watch(minum.y, () => {
   
 <style scoped>
 .showText {
+  width: 100%;
   border: 0;
   font-size: 1.2rem;
   outline: medium;
