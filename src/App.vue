@@ -8,7 +8,7 @@
     <div> {{ msg }}</div>
     <myWidget :class="{ hidden: help }"> </myWidget>
    
-    <TodoWidget/>
+    <TodoWidget :class="{ hidden: help }" />
  
     <template v-for="w in widgets">
       <MyWidget v-bind:id="w.id"></MyWidget>
@@ -51,8 +51,9 @@ const addWidget = (v: never) => {
 
 
 
-// 热键部分
-var help = ref(false);
+
+//组件相关
+const help = useStorage('help-bool' , true)
 const { ctrl_a_d, ctrl_h, current } = useMagicKeys()
 const keys = computed(() => {
  var newList :any[]= [];
