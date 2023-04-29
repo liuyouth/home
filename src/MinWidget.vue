@@ -6,7 +6,7 @@
       :options="optionsComponent">
 
 
-      <context-menu-sperator /><!--use this to add sperator-->
+     
       <div v-if="isImg" style="width: 250px;padding: 5px ;">
         <div style="margin-left: 10px; width: 130px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(175, 55, 255,0.28);color:rgb(175,55,255)">
           更改图片地址
@@ -19,12 +19,14 @@
         <div style="width: 70px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(60, 130, 255,0.38);color:rgb(60, 130, 255)">
           CSS3</div>
           <div style="margin-left: 10px;width: 170px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(60, 130, 255,0.38);color:rgb(60, 130, 255)">
-          直接输入的css代码 会改变当前div的</div>
+          直接输入的css代码</div>
       </div>
       <div style=" width: 252px;"  >
         <!-- -->
         <div style="width: 95%;margin: 0 auto;">
+          未实现
           <textarea style="border: 2px solid #b8fbc3;width: 100%;" name="" id="" cols="30" rows="10"  textarea/>
+
         </div>
 
       </div>
@@ -34,7 +36,7 @@
         <div style="width: 60px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(225, 103, 103,0.28);color:rgb(255, 71, 71)">
           DEL
         </div>
-        
+        未实现
       </context-menu-item>
       <context-menu-sperator /><!--use this to add sperator-->
       <context-menu-group label="Menu with child">
@@ -235,10 +237,9 @@ textarea {
   transition: box-shadow linear .2s;
 }
 
-
 /* 拖动时候样式 */
 .min-widget:active {
-  background-color: #b8fbc3;
+  background-color: #b8fbc3b0;
   box-shadow: 0 0 16px rgba(104, 244, 128, 0.8);
 }
 

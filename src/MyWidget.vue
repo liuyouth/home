@@ -22,8 +22,7 @@
       <MinWidget v-bind:id="'min'+w.id" :is-img="w.isImg"  v-bind:ppx="x" v-bind:ppy="y" ></MinWidget>
     </template>
     
-      <MinWidget :id="'min' + id" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
-      <MinWidget :id="'min2' + id" :img-link="'https://img.alicdn.com/imgextra/i3/2640093793/O1CN01muaQWv1dtEzpINPlt_!!2640093793.jpg'"  :isImg="true" @clickId="clickId" v-bind:ppx="x" v-bind:ppy="y" />
+      
     </div>
 
 
