@@ -1,6 +1,7 @@
 <template>
     <div ref="el" :style="style" style="width: 320px;" class="widget">
         ⏱️ {{word}}
+        数据结构要改版，现在存储太散乱了改成云端太费劲
         白板要有页面的区分，学习白板 ，工作白板，等等
         <br>
         整理json结构，组件内控制小组件的管理，小组件一个id存储所有的数据。
