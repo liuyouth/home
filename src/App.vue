@@ -227,6 +227,11 @@ p {
 .widgetsBox {
   transition: all .5s;
   opacity: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: -1100px;
 }
 
 .widgetsBox.menuBoxOpen {
@@ -249,6 +254,8 @@ a {
 }
 .curr{
   opacity: 1;
+  z-index: 2;
+  top: 0px;
 }
 
 .showText {
