@@ -215,6 +215,7 @@ p {
   z-index: 10;
   border-radius: 0 0 30px 30px;
   transition: all .5s;
+  
 }
 
 .menuBox.menuBoxOpen {
@@ -228,9 +229,9 @@ p {
   transition: all .5s;
   opacity: 0;
   z-index: 1;
-  width: 100%;
-  height: 100%;
-  position: relative;
+  width: 100px;
+  height: 100px;
+  position: absolute;
   top: -1100px;
 }
 
@@ -256,6 +257,8 @@ a {
   opacity: 1;
   z-index: 2;
   top: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 .showText {
