@@ -239,7 +239,7 @@ p {
   /* -webkit-transform: translateY(180px) scale(0.8);
       -moz-transform: translateY(180px) scale(0.8);
       -ms-transform: translateY(180px) scale(0.8); */
-  transform: translateY(180px) scale(0.8);
+  transform: translateY(96px) scale(0.8);
 }
 
 a {
