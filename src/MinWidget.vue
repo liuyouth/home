@@ -4,9 +4,6 @@
     :storage-key="'xy' + id" storage-type="local">
     <context-menu v-model:show="show"
       :options="optionsComponent">
-
-
-     
       <div v-if="isImg" style="width: 250px;padding: 5px ;">
         <div style="margin-left: 10px; width: 130px;font-size: 1.2rem;border-radius: 5px;text-align: center; background: rgba(175, 55, 255,0.28);color:rgb(175,55,255)">
           更改图片地址
@@ -50,8 +47,11 @@
 
 
 
-
-    <input class="showText" type="text" v-if="!isImg" ref="minel" v-model="usTxt">
+    <!-- <a v-if="!isImg" href="obsidian://open?vault=%E8%A7%84%E5%88%92%E8%93%9D%E5%9B%BE&file=%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF%2F%E6%AF%8F%E6%97%A5%E4%BB%BB%E5%8A%A1.canvas" target="_blank">
+      <img v-if="!isImg" style="width: 40px;" src="./imgs/obsidian-icon.png">
+    </a> -->
+    <textarea class="showText" type="text" v-if="!isImg" ref="minel" v-model="usTxt"/>
+ 
     <img v-if="isImg" :src="usImg" alt="" style="height:100%;width: 100%;" ref="minel" draggable="false">
     <!-- {{ ppx }} + {{ ppy }}
      <br>
@@ -64,6 +64,7 @@
 
     <div ref="el" class="resize">
       <img src="./imgs/resize.png" style="width: 88%;opacity: .5;" alt="">
+      
     </div>
   </div>
 </template>

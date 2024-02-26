@@ -1,6 +1,7 @@
 <template>
     <div ref="el" :style="style" style="width: 320px;" class="widget">
         ⏱️ {{word}}
+        <br>
         多页面模式，以及首页缩略图查看页面类型。
         多组件复制，
 
