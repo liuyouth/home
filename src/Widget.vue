@@ -18,6 +18,9 @@
         <br><br>
         需要需要帮助的时候按 <span>H</span> +<span>Ctrl</span>
         <br>
+        <br>
+        呼出页面菜单 <span>M</span> +<span>Ctrl</span>
+        <br>
         👋 Drag me!
     </div>
 </template>
