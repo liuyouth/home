@@ -28,8 +28,8 @@
       </div>
     </div>
 
-
-    <!-- <img v-for="r in rr" :key="r.w"  :width="r.w" :height="r.h" :src="r.data" /> -->
+<!-- 
+    <ImageGallery :images="rr" /> -->
 
 
 
@@ -62,19 +62,24 @@ import axios from 'axios';
 
 import { Guid } from 'guid-typescript';
 import { useStorage } from '@vueuse/core'
+import ImageGallery from './components/ImageGallery.vue'
+import type { ImageData, Widget, Page } from './types/types'
+
 // 平台服务
 
 const msg = ref("");
 const isMenuOpen = ref(false);
 
-var rr = ref([]);
+const rr = ref<ImageData[]>([]);
 axios.get("src/json/rrr.json").then((response) => {
 
   rr.value = response.data
 })
 
 //组件相关
-const pages = useStorage('whiteboard-pages', [{ name: "", isCurrent: true, widgets: [] }])
+const pages = useStorage<Page[]>('whiteboard-pages', [
+  { name: "", isCurrent: true, widgets: [] }
+])
 const pageName = ref(pages.value[0].name)
 const currIndex = ref(0)
 const refreshPage = () => {
@@ -90,7 +95,7 @@ refreshPage();
 const showMsg = (m: string) => {
   msg.value = m
 }
-const addWidget = (v: never) => {
+const addWidget = (v: Widget) => {
   showMsg("创建成功")
   pages.value.forEach((p) => {
     if (p.isCurrent) {
@@ -142,17 +147,16 @@ function removeKeyFromMK(MK: string): string {
     return MK;
   }
 }
-const onPageSelect =
-  (page: { name: string; isCurrent: boolean }) => {
-    pages.value.forEach((p) => {
-      p.isCurrent = false;
-      if (p.name === page.name) {
-        p.isCurrent = true
-      }
-    });
-    isMenuOpen.value = !isMenuOpen.value
-    refreshPage();
-  }
+const onPageSelect = (page: Page) => {
+  pages.value.forEach((p) => {
+    p.isCurrent = false;
+    if (p.name === page.name) {
+      p.isCurrent = true
+    }
+  });
+  isMenuOpen.value = !isMenuOpen.value
+  refreshPage();
+}
 const onAddPageClick = () => {
 
   pages.value.push({ name: "page" + (pages.value.length + 1), isCurrent: false, widgets: [] })
