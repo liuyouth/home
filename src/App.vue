@@ -28,8 +28,8 @@
       </div>
     </div>
 
-<!-- 
-    <ImageGallery :images="rr" /> -->
+
+    <ImageGallery :images="rr" /> 
 
 
 
